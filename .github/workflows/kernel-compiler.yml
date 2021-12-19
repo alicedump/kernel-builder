@@ -1,0 +1,197 @@
+name: Building New Kernel
+
+on: [push]
+
+env:
+  GIT_SECRETB: ${{ secrets.GIT_SECRETB }}
+  GIT_SECRET: ${{ secrets.GIT_SECRET }}
+  BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+  GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+  ZIP_PASS: ${{ secrets.ZIP_PASS }}
+  TZ: Asia/Jakarta
+
+jobs:
+  build-lancelot-r-oss-test4:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: initialize
+        run: |
+          chmod +x misc/initialize.sh
+          sudo bash misc/initialize.sh
+
+      - name: Set Swap Space
+        run: |
+          chmod +x misc/setswap.sh
+          sudo bash misc/setswap.sh 14
+
+      - name: Compile Kernel
+        run: |
+          chmod +x maing.sh
+          bash maing.sh 'lancelot-r-oss-test4'
+
+  build-lancelot-r-oss-test3:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: initialize
+        run: |
+          chmod +x misc/initialize.sh
+          sudo bash misc/initialize.sh
+
+      - name: Set Swap Space
+        run: |
+          chmod +x misc/setswap.sh
+          sudo bash misc/setswap.sh 14
+
+      - name: Compile Kernel
+        run: |
+          chmod +x maing.sh
+          bash maing.sh 'lancelot-r-oss-test3'
+
+  build-lancelot-r-oss-test2:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: initialize
+        run: |
+          chmod +x misc/initialize.sh
+          sudo bash misc/initialize.sh
+
+      - name: Set Swap Space
+        run: |
+          chmod +x misc/setswap.sh
+          sudo bash misc/setswap.sh 14
+
+      - name: Compile Kernel
+        run: |
+          chmod +x maing.sh
+          bash maing.sh 'lancelot-r-oss-test2'
+
+  build-lancelot-r-oss-test-uv4:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: initialize
+        run: |
+          chmod +x misc/initialize.sh
+          sudo bash misc/initialize.sh
+
+      - name: Set Swap Space
+        run: |
+          chmod +x misc/setswap.sh
+          sudo bash misc/setswap.sh 14
+
+      - name: Compile Kernel
+        run: |
+          chmod +x maing.sh
+          bash maing.sh 'lancelot-r-oss-test-uv4'
+
+  build-lancelot-r-oss-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: initialize
+        run: |
+          chmod +x misc/initialize.sh
+          sudo bash misc/initialize.sh
+
+      - name: Set Swap Space
+        run: |
+          chmod +x misc/setswap.sh
+          sudo bash misc/setswap.sh 14
+
+      - name: Compile Kernel
+        run: |
+          chmod +x maing.sh
+          bash maing.sh 'lancelot-r-oss-test'
+
+  build-lancelot-r-oss-test-uv3:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: initialize
+        run: |
+          chmod +x misc/initialize.sh
+          sudo bash misc/initialize.sh
+
+      - name: Set Swap Space
+        run: |
+          chmod +x misc/setswap.sh
+          sudo bash misc/setswap.sh 14
+
+      - name: Compile Kernel
+        run: |
+          chmod +x maing.sh
+          bash maing.sh 'lancelot-r-oss-test-uv3'
+
+  build-lancelot-r-oss-test-uv2:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: initialize
+        run: |
+          chmod +x misc/initialize.sh
+          sudo bash misc/initialize.sh
+
+      - name: Set Swap Space
+        run: |
+          chmod +x misc/setswap.sh
+          sudo bash misc/setswap.sh 14
+
+      - name: Compile Kernel
+        run: |
+          chmod +x maing.sh
+          bash maing.sh 'lancelot-r-oss-test-uv2'
+
+  build-lancelot-r-oss-test-uv:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: initialize
+        run: |
+          chmod +x misc/initialize.sh
+          sudo bash misc/initialize.sh
+
+      - name: Set Swap Space
+        run: |
+          chmod +x misc/setswap.sh
+          sudo bash misc/setswap.sh 14
+
+      - name: Compile Kernel
+        run: |
+          chmod +x maing.sh
+          bash maing.sh 'lancelot-r-oss-test-uv'
+
