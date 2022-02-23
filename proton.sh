@@ -5,8 +5,8 @@
 
 echo "Downloading few Dependecies . . ."
 # Kernel Sources
-git clone --depth=1 https://Egii:$GITHUB_TOKEN@github.com/rubyzee/android_kernel_xiaomi_mt6768 -b $KERNEL_BRANCH $DEVICE_CODENAME
-git clone --depth=1 https://github.com/kdragOn/proton-clang proton
+git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_kernel_xiaomi_mt6768 $KERNEL_BRANCH $DEVICE_CODENAME
+git clone --depth=1 https://github.com/kdrag0n/proton-clang proton
 
 # Main Declaration
 KERNEL_NAME=$(cat "$KERNEL_ROOTDIR/arch/arm64/configs/$DEVICE_DEFCONFIG" | grep "CONFIG_LOCALVERSION=" | sed 's/CONFIG_LOCALVERSION="-*//g' | sed 's/"*//g' )
@@ -50,7 +50,7 @@ tg_post_msg() {
 }
 
 # Post Main Information
-tg_post_msg "<b>KernelCompiler</b>%0A%0AKernel Name : <code>${KERNEL_NAME}</code>%0A%0ADevice : <code>${DEVICE}</code>%0A%0ADevice Codename : <code>${DEVICE_CODENAME}</code>%0A%0AKernel Version : <code>${KERVER}</code>%0A%0ABuild Date : <code>${DATE}</code>%0A%0ABuilder Name : <code>${KBUILD_BUILD_USER}</code>%0A%0ABuilder Host : <code>${KBUILD_BUILD_HOST}</code>%0A%0ADevice Defconfig: <code>${DEVICE_DEFCONFIG}</code>%0A%0ACompile Used : <code>${KBUILD_COMPILER_STRING}</code>"
+tg_post_msg "<b>🔨 Build Triggered</b>%0A%0AKernel Name : <code>${KERNEL_NAME}</code>%0A%0ADevice : <code>${DEVICE}</code>%0A%0ADevice Codename : <code>${DEVICE_CODENAME}</code>%0A%0AKernel Version : <code>${KERVER}</code>%0A%0ABuild Date : <code>${DATE}</code>%0A%0ABuilder Name : <code>${KBUILD_BUILD_USER}</code>%0A%0ABuilder Host : <code>${KBUILD_BUILD_HOST}</code>%0A%0ADevice Defconfig: <code>${DEVICE_DEFCONFIG}</code>%0A%0ACompile Used : <code>${KBUILD_COMPILER_STRING}</code>"
 
 # Compile
 compile(){

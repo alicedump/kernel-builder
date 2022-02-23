@@ -2,17 +2,14 @@ name: Building New Kernel
 
 on: [push]
 
+env:
+   GIT_SECRET: ${{ secrets.GIT_SECRET }}
+   GIT_USER: ${{ secrets.GIT_USER }}
+   GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+   TG_TOKEN: ${{ secrets.TG_TOKEN }}
+
 jobs:
   build-lancelot-r-oss-clang15:
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  TG_TOKEN: ${{ secrets.TG_TOKEN }}
-  KERNEL_BRANCH:violet-base
-  TG_CHAT_ID:-1001711585630
-  TZ: Asia/Jakarta
-  DEVICE_DEFCONFIG:lancelot_defconfig
-  DEVICE_CODENAME:Lancelot
-  DEVICE:Redmi 9
    
     runs-on: ubuntu-latest
 
@@ -26,20 +23,21 @@ env:
           sudo bash setup.sh
 
       - name: Compile Kernel
+        env:
+              GIT_USER: ${{ secrets.GIT_USER }}
+              GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+              TG_TOKEN: ${{ secrets.TG_TOKEN }}
+              KERNEL_BRANCH: -b violet-base
+              TG_CHAT_ID: -1001711585630
+              TZ: Asia/Jakarta
+              DEVICE_DEFCONFIG: lancelot_defconfig
+              DEVICE_CODENAME: Lancelot
+              DEVICE: Redmi 9
         run: |
           chmod +x clang15.sh
           bash clang15.sh
           
   build-lancelot-r-oss-proton:
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  TG_TOKEN: ${{ secrets.TG_TOKEN }}
-  KERNEL_BRANCH:violet-base
-  TG_CHAT_ID:-1001711585630
-  TZ: Asia/Jakarta
-  DEVICE_DEFCONFIG:lancelot_defconfig
-  DEVICE_CODENAME:Lancelot
-  DEVICE:Redmi 9
 
     runs-on: ubuntu-latest
 
@@ -53,20 +51,22 @@ env:
           sudo bash setup.sh
 
       - name: Compile Kernel
+        env:
+              GIT_USER: ${{ secrets.GIT_USER }}
+              GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+              TG_TOKEN: ${{ secrets.TG_TOKEN }}
+              KERNEL_BRANCH: -b violet-base
+              TG_CHAT_ID: -1001711585630
+              TZ: Asia/Jakarta
+              DEVICE_DEFCONFIG: lancelot_defconfig
+              DEVICE_CODENAME: Lancelot
+              DEVICE: Redmi 9
+
         run: |
           chmod +x proton.sh
           bash proton.sh
           
   build-lancelot-r-oss-gcc:
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  TG_TOKEN: ${{ secrets.TG_TOKEN }}
-  KERNEL_BRANCH:violet-gcc
-  TG_CHAT_ID:-1001711585630
-  TZ: Asia/Jakarta
-  DEVICE_DEFCONFIG:lancelot_defconfig
-  DEVICE_CODENAME:Lancelot
-  DEVICE:Redmi 9
 
     runs-on: ubuntu-latest
 
@@ -80,20 +80,21 @@ env:
           sudo bash setup.sh
 
       - name: Compile Kernel
+        env:
+              GIT_USER: ${{ secrets.GIT_USER }}
+              GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+              TG_TOKEN: ${{ secrets.TG_TOKEN }}
+              KERNEL_BRANCH: -b violet-gcc
+              TG_CHAT_ID: -1001711585630
+              TZ: Asia/Jakarta
+              DEVICE_DEFCONFIG: lancelot_defconfig
+              DEVICE_CODENAME: Lancelot
+              DEVICE: Redmi 9
         run: |
           chmod +x gcc.sh
           bash gcc.sh
 
   build-merlin-r-oss-clang15:
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  TG_TOKEN: ${{ secrets.TG_TOKEN }}
-  KERNEL_BRANCH:violet-base
-  TG_CHAT_ID:-1001711585630
-  TZ: Asia/Jakarta
-  DEVICE_DEFCONFIG:merlin_defconfig
-  DEVICE_CODENAME:Merlin
-  DEVICE:Redmi Note 9
 
     runs-on: ubuntu-latest
 
@@ -107,20 +108,21 @@ env:
           sudo bash setup.sh
 
       - name: Compile Kernel
+        env:
+              GIT_USER: ${{ secrets.GIT_USER }}
+              GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+              TG_TOKEN: ${{ secrets.TG_TOKEN }}
+              KERNEL_BRANCH: -b violet-base
+              TG_CHAT_ID: -1001711585630
+              TZ: Asia/Jakarta
+              DEVICE_DEFCONFIG: merlin_defconfig
+              DEVICE_CODENAME: Merlin
+              DEVICE: Redmi Note 9
         run: |
           chmod +x clang15.sh
           bash clang15.sh
           
   build-merlin-r-oss-proton:
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  TG_TOKEN: ${{ secrets.TG_TOKEN }}
-  KERNEL_BRANCH:violet-base
-  TG_CHAT_ID:-1001711585630
-  TZ: Asia/Jakarta
-  DEVICE_DEFCONFIG:merlin_defconfig
-  DEVICE_CODENAME:Merlin
-  DEVICE:Redmi Note 9
 
     runs-on: ubuntu-latest
 
@@ -134,20 +136,21 @@ env:
           sudo bash setup.sh
 
       - name: Compile Kernel
+        env:
+                GIT_USER: ${{ secrets.GIT_USER }}
+                GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+                TG_TOKEN: ${{ secrets.TG_TOKEN }}
+                KERNEL_BRANCH: -b violet-base
+                TG_CHAT_ID: -1001711585630
+                TZ: Asia/Jakarta
+                DEVICE_DEFCONFIG: merlin_defconfig
+                DEVICE_CODENAME: Merlin
+                DEVICE: Redmi Note 9
         run: |
           chmod +x proton.sh
           bash proton.sh
           
-  build-lancelot-r-oss-gcc:
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  TG_TOKEN: ${{ secrets.TG_TOKEN }}
-  KERNEL_BRANCH:violet-gcc
-  TG_CHAT_ID:-1001711585630
-  TZ: Asia/Jakarta
-  DEVICE_DEFCONFIG:merlin_defconfig
-  DEVICE_CODENAME:Lancelot
-  DEVICE:Redmi Note 9
+  build-merlin-r-oss-gcc:
 
     runs-on: ubuntu-latest
 
@@ -161,7 +164,17 @@ env:
           sudo bash setup.sh
 
       - name: Compile Kernel
+        env:
+              GIT_USER: ${{ secrets.GIT_USER }}
+              GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+              TG_TOKEN: ${{ secrets.TG_TOKEN }}
+              KERNEL_BRANCH: -b violet-gcc
+              TG_CHAT_ID: -1001711585630
+              TZ: Asia/Jakarta
+              DEVICE_DEFCONFIG: merlin_defconfig
+              DEVICE_CODENAME: Merlin
+              DEVICE: Redmi Note 9
         run: |
           chmod +x gcc.sh
           bash gcc.sh
-          
+
