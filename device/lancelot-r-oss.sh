@@ -2,7 +2,7 @@
 
 DEVICE="Redmi 9"
 CODENAME="Lancelot"
-SaveChatID="-1001301538740"
+SaveChatID="-1001711585630"
 ARCH="arm64"
 TypeBuild="Stable"
 DEFFCONFIG="lancelot_defconfig"

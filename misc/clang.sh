@@ -4,13 +4,13 @@ CloneGugelClang(){
     ClangPath=${MainClangPath}
     [[ "$(pwd)" != "${MainPath}" ]] && cd "${MainPath}"
     if [ ! -d "${ClangPath}" ];then
-        git clone https://github.com/ZyCromerZ/google-clang -b 9.0.4-r353983d "${ClangPath}" --depth=1
+        git clone https://github.com/aliciahouse/AliceTC -b main "${ClangPath}" --depth=1
     else
         cd "${ClangPath}"
-        git fetch https://github.com/ZyCromerZ/google-clang 9.0.4-r353983d --depth=1
+        git fetch https://github.com/aliciahouse/AliceTC main --depth=1
         git checkout FETCH_HEAD
-        [[ ! -z "$(git branch | grep 9.0.4-r353983d)" ]] && git branch -D 9.0.4-r353983d
-        git checkout -b 9.0.4-r353983d
+        [[ ! -z "$(git branch | grep main)" ]] && git branch -D main
+        git checkout -b main
     fi
     TypeBuilder="CLANG"
     ClangType="$(${ClangPath}/bin/clang --version | head -n 1)"
@@ -127,19 +127,19 @@ CloneZyCFoutTeenClang()
     ClangType="$(${ClangPath}/bin/clang --version | head -n 1)"
 }
 
-CloneZyCFoutTeenLabClang()
+CloneAliceFiveTeenClang()
 {
     ClangPath=${MainClangPath}
     [[ "$(pwd)" != "${MainPath}" ]] && cd "${MainPath}"
     if [ ! -d "${ClangPath}" ];then
-        git clone https://git@gitlab.com/ZyCromerZ/clang.git -b 14.0.0 "${ClangPath}" --depth=1
+        git clone https://git@gitlab.com/aliciahouse/AliceTC -b main "${ClangPath}" --depth=1
     else
         cd "${ClangPath}"
-        git fetch https://git@gitlab.com/ZyCromerZ/clang.git 14.0.0 --depth=1
+        git fetch https://git@gitlab.com/aliciahouse/AliceTC main --depth=1
         git checkout FETCH_HEAD
-        [[ ! -z "$(git branch | grep 14.0.0)" ]] && git branch -D 14.0.0
-        git checkout -b 14.0.0
+        [[ ! -z "$(git branch | grep main)" ]] && git branch -D main
+        git checkout -b main
     fi
-    TypeBuilder="CLANG-14"
+    TypeBuilder="CLANG-15"
     ClangType="$(${ClangPath}/bin/clang --version | head -n 1)"
 }

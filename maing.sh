@@ -20,7 +20,7 @@ KDpath="${MainPath}/Kernel-Downloader"
 KDType=""
 
 export DEBIAN_FRONTEND=noninteractive
-export KBUILD_BUILD_USER="ZyCromerZ"
+export KBUILD_BUILD_USER="Alicia"
 TotalCores="$(nproc --all)"
 DoSudo=""
 if [ ! -z "${CIRCLE_BRANCH}" ];then
@@ -57,8 +57,8 @@ IncludeFiles(){
 }
 apt-get -y install cpio libtinfo5 curl zip unzip
 
-git config --global user.name "ZyCromerZ"
-git config --global user.email "neetroid97@gmail.com"
+git config --global user.name "rubyzee"
+git config --global user.email "regidesoftian@gmail.com"
 
 if [[ -z "${GIT_SECRETB}" ]] || [[ -z "${GIT_SECRET}" ]] || [[ -z "${BOT_TOKEN}" ]] || [[ -z "${GIT_USERNAME}" ]];then
     echo "some needed files missing, just skip compile kernels"

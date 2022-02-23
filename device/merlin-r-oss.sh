@@ -2,7 +2,7 @@
 
 DEVICE="Redmi Note 9"
 CODENAME="Merlin"
-SaveChatID="-1001301538740"
+SaveChatID="-1001711585630"
 ARCH="arm64"
 TypeBuild="Stable"
 DEFFCONFIG="merlin_defconfig"

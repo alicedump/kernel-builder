@@ -11,7 +11,7 @@ env:
   TZ: Asia/Jakarta
 
 jobs:
-  build-lancelot-r-oss-test4:
+  build-lancelot-r-oss-stock:
 
     runs-on: ubuntu-latest
 
@@ -32,32 +32,9 @@ jobs:
       - name: Compile Kernel
         run: |
           chmod +x maing.sh
-          bash maing.sh 'lancelot-r-oss-test4'
+          bash maing.sh 'lancelot-r-oss-stock'
 
-  build-lancelot-r-oss-test3:
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: initialize
-        run: |
-          chmod +x misc/initialize.sh
-          sudo bash misc/initialize.sh
-
-      - name: Set Swap Space
-        run: |
-          chmod +x misc/setswap.sh
-          sudo bash misc/setswap.sh 14
-
-      - name: Compile Kernel
-        run: |
-          chmod +x maing.sh
-          bash maing.sh 'lancelot-r-oss-test3'
-
-  build-lancelot-r-oss-test2:
+  build-lancelot-r-oss-almk:
 
     runs-on: ubuntu-latest
 
@@ -78,32 +55,9 @@ jobs:
       - name: Compile Kernel
         run: |
           chmod +x maing.sh
-          bash maing.sh 'lancelot-r-oss-test2'
+          bash maing.sh 'lancelot-r-oss-almk'
 
-  build-lancelot-r-oss-test-uv4:
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: initialize
-        run: |
-          chmod +x misc/initialize.sh
-          sudo bash misc/initialize.sh
-
-      - name: Set Swap Space
-        run: |
-          chmod +x misc/setswap.sh
-          sudo bash misc/setswap.sh 14
-
-      - name: Compile Kernel
-        run: |
-          chmod +x maing.sh
-          bash maing.sh 'lancelot-r-oss-test-uv4'
-
-  build-lancelot-r-oss-test:
+  build-lancelot-r-oss-slmk:
 
     runs-on: ubuntu-latest
 
@@ -124,32 +78,9 @@ jobs:
       - name: Compile Kernel
         run: |
           chmod +x maing.sh
-          bash maing.sh 'lancelot-r-oss-test'
+          bash maing.sh 'lancelot-r-oss-slmk'
 
-  build-lancelot-r-oss-test-uv3:
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: initialize
-        run: |
-          chmod +x misc/initialize.sh
-          sudo bash misc/initialize.sh
-
-      - name: Set Swap Space
-        run: |
-          chmod +x misc/setswap.sh
-          sudo bash misc/setswap.sh 14
-
-      - name: Compile Kernel
-        run: |
-          chmod +x maing.sh
-          bash maing.sh 'lancelot-r-oss-test-uv3'
-
-  build-lancelot-r-oss-test-uv2:
+  build-lancelot-r-oss-test-gcc:
 
     runs-on: ubuntu-latest
 
@@ -170,9 +101,9 @@ jobs:
       - name: Compile Kernel
         run: |
           chmod +x maing.sh
-          bash maing.sh 'lancelot-r-oss-test-uv2'
+          bash maing.sh 'lancelot-r-oss-gcc'
 
-  build-lancelot-r-oss-test-uv:
+  build-merlin-r-oss-stock:
 
     runs-on: ubuntu-latest
 
@@ -193,5 +124,74 @@ jobs:
       - name: Compile Kernel
         run: |
           chmod +x maing.sh
-          bash maing.sh 'lancelot-r-oss-test-uv'
+          bash maing.sh 'merlin-r-oss-stock'
+
+  build-merlin-r-oss-almk:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: initialize
+        run: |
+          chmod +x misc/initialize.sh
+          sudo bash misc/initialize.sh
+
+      - name: Set Swap Space
+        run: |
+          chmod +x misc/setswap.sh
+          sudo bash misc/setswap.sh 14
+
+      - name: Compile Kernel
+        run: |
+          chmod +x maing.sh
+          bash maing.sh 'merlin-r-oss-almk'
+
+  build-merlin-r-oss-slmk:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: initialize
+        run: |
+          chmod +x misc/initialize.sh
+          sudo bash misc/initialize.sh
+
+      - name: Set Swap Space
+        run: |
+          chmod +x misc/setswap.sh
+          sudo bash misc/setswap.sh 14
+
+      - name: Compile Kernel
+        run: |
+          chmod +x maing.sh
+          bash maing.sh 'merlin-r-oss-slmk'
+
+  build-merlin-r-oss-gcc:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: initialize
+        run: |
+          chmod +x misc/initialize.sh
+          sudo bash misc/initialize.sh
+
+      - name: Set Swap Space
+        run: |
+          chmod +x misc/setswap.sh
+          sudo bash misc/setswap.sh 14
+
+      - name: Compile Kernel
+        run: |
+          chmod +x maing.sh
+          bash maing.sh 'merlin-r-oss-gcc'
 

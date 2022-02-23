@@ -156,27 +156,27 @@ CloneCompiledGccTwelve(){
     [[ "$(pwd)" != "${MainPath}" ]] && cd "${MainPath}"
     GCCaPath="${MainGCCaPath}"
     if [ ! -d "$GCCaPath" ];then
-        git clone https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 12 $GCCaPath --depth=1
+        git clone https://github.com/aliciahouse/aarch64-linux-gnu -b gcc-12 $GCCaPath --depth=1
     else
         cd "${GCCaPath}"
-        git fetch https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu 12 --depth=1
+        git fetch https://github.com/aliciahouse/aarch64-linux-gnu gcc-12 --depth=1
         git checkout FETCH_HEAD
-        [[ ! -z "$(git branch | grep 12)" ]] && git branch -D 12
-        git checkout -b 12
+        [[ ! -z "$(git branch | grep gcc-12)" ]] && git branch -D gcc-12
+        git checkout -b gcc-12
     fi
-    for64=aarch64-zyc-linux-gnu
+    for64=aarch64-linux-gnu
     [[ "$(pwd)" != "${MainPath}" ]] && cd "${MainPath}"
     GCCbPath="${MainGCCbPath}"
     if [ ! -d "$GCCbPath" ];then
-        git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 12 $GCCbPath --depth=1
+        git clone https://github.com/aliciahouse/arm-linux-gnueabi -b gcc-12 $GCCbPath --depth=1
     else
         cd "${GCCbPath}"
-        git fetch https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi 12 --depth=1
+        git fetch https://github.com/aliciahouse/arm-linux-gnueabi gcc-12 --depth=1
         git checkout FETCH_HEAD
-        [[ ! -z "$(git branch | grep 12)" ]] && git branch -D 12
-        git checkout -b 12
+        [[ ! -z "$(git branch | grep 12)" ]] && git branch -D gcc-12
+        git checkout -b gcc-12
     fi
-    for32=arm-zyc-linux-gnueabi
+    for32=arm-linux-gnueabi
     GetGccVersion
 }
 
