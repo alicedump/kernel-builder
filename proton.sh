@@ -9,9 +9,9 @@ git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_
 git clone --depth=1 https://github.com/kdrag0n/proton-clang proton
 
 # Main Declaration
-KERNEL_NAME=$(cat "$KERNEL_ROOTDIR/arch/arm64/configs/$DEVICE_DEFCONFIG" | grep "CONFIG_LOCALVERSION=" | sed 's/CONFIG_LOCALVERSION="-*//g' | sed 's/"*//g' )
-KERNEL_ROOTDIR=$(pwd)/$DEVICE_CODENAME
-ZIPNAME=[DATE2]$KERVER[Proton]$KERNEL_NAME[R-OSS]-$HASH.zip
+KERNEL_NAME=$(cat "arch/arm64/configs/$DEVICE_DEFCONFIG" | grep "CONFIG_LOCALVERSION=" | sed 's/CONFIG_LOCALVERSION="-*//g' | sed 's/"*//g' )
+KERNEL_ROOTDIR=$(pwd)
+KERNELFILE=$(pwd)/AnyKernel/$(echo *.zip)
 DEVICE=$DEVICE
 DEVICE_DEFCONFIG=$DEVICE_DEFCONFIG
 CLANG_ROOTDIR=$(pwd)/proton
@@ -22,21 +22,18 @@ export KBUILD_BUILD_HOST=XZI-TEAM
 CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
 export KBUILD_COMPILER_STRING="$CLANG_VER"
-IMAGE=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
-MD5CHECK=$(md5sum "${ZIP}" | cut -d' ' -f1)
-SHA1CHECK=$(sha1sum "${ZIP}" | cut -d' ' -f1)
+IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date +"%F-%S")
 DATE2=$(date +"%m%d")
 START=$(date +"%s")
-DTB=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/dts/mediatek/mt6768.dtb
-DTBO=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/dtbo.img
+DTB=$(pwd)/out/arch/arm64/boot/dts/mediatek/mt6768.dtb
+DTBO=$(pwd)/out/arch/arm64/boot/dtbo.img
 PATH="${PATH}:${CLANG_ROOTDIR}/bin"
+HeadCommitId="$(git log --pretty=format:'%h' -n1)"
+HeadCommitMsg="$(git log --pretty=format:'%s' -n1)"
 
 #Check Kernel Version
 KERVER=$(make kernelversion)
-HASH="$(git log --pretty=format:'%h' -n1)"
-HeadCommitId="$(git log --pretty=format:'%h' -n1)"
-HeadCommitMsg="$(git log --pretty=format:'%s' -n1)"
 
 # Telegram
 export BOT_MSG_URL="https://api.telegram.org/bot$TG_TOKEN/sendMessage"
@@ -83,12 +80,14 @@ make -j$(nproc) ARCH=arm64 O=out \
 # Push kernel to channel
 function push() {
     cd AnyKernel
+    MD5CHECK=$(md5sum "${KERNELFILE}" | cut -d' ' -f1)
+    SHA1CHECK=$(sha1sum "${KERNELFILE}" | cut -d' ' -f1)
     ZIP=$(echo *.zip)
     curl -F document=@$ZIP "https://api.telegram.org/bot$TG_TOKEN/sendDocument" \
         -F chat_id="$TG_CHAT_ID" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
-        -F caption="✅ <b>Build Success</b>%0A- <code>$((DIFF / 60)) minute(s) $((DIFF % 60)) second(s) </code>%0A%0A<b>MD5 Checksum</b>%0A- <code>$MD5CHECK</code>%0A%0A<b>SHA1 Checksum</b>%0A- <code>$SHA1CHECK</code>%0A%0A<b>Under Commit Id : Message</b>%0A- <code>${HeadCommitId}</code> : <code>${HeadCommitMsg}</code>%0A%0A<b>Compilers</b>%0A$KBUILD_COMPILER_STRINGS%0A%0A<b>Zip Name</b>%0A- <code>$ZIP</code>"
+        -F caption="✅ Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For <b>$DEVICE_CODENAME</b> | <b>${KBUILD_COMPILER_STRING}</b>"
 }
 # Fin Error
 function finerr() {
@@ -103,9 +102,10 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 $ZIPNAME *
+    zip -r9 [$DATE2]$KERVER[Proton]$KERNEL_NAME[$DEVICE_CODENAME][R-OSS]-$HeadCommitId.zip *
     cd ..
 }
+
 compile
 zipping
 END=$(date +"%s")

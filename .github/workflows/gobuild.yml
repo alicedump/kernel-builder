@@ -7,6 +7,8 @@ env:
    GIT_USER: ${{ secrets.GIT_USER }}
    GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
    TG_TOKEN: ${{ secrets.TG_TOKEN }}
+   TG_CHAT_ID: -1001711585630
+   TZ: Asia/Jakarta
 
 jobs:
   build-lancelot-r-oss-clang15:
@@ -24,16 +26,14 @@ jobs:
 
       - name: Compile Kernel
         env:
-              GIT_USER: ${{ secrets.GIT_USER }}
-              GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
-              TG_TOKEN: ${{ secrets.TG_TOKEN }}
               KERNEL_BRANCH: -b violet-base
-              TG_CHAT_ID: -1001711585630
-              TZ: Asia/Jakarta
               DEVICE_DEFCONFIG: lancelot_defconfig
               DEVICE_CODENAME: Lancelot
               DEVICE: Redmi 9
         run: |
+          git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_kernel_xiaomi_mt6768 $KERNEL_BRANCH $DEVICE_CODENAME
+          cp clang15.sh $DEVICE_CODENAME
+          cd $DEVICE_CODENAME
           chmod +x clang15.sh
           bash clang15.sh
           
@@ -52,17 +52,16 @@ jobs:
 
       - name: Compile Kernel
         env:
-              GIT_USER: ${{ secrets.GIT_USER }}
-              GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
               TG_TOKEN: ${{ secrets.TG_TOKEN }}
               KERNEL_BRANCH: -b violet-base
-              TG_CHAT_ID: -1001711585630
-              TZ: Asia/Jakarta
               DEVICE_DEFCONFIG: lancelot_defconfig
               DEVICE_CODENAME: Lancelot
               DEVICE: Redmi 9
 
         run: |
+          git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_kernel_xiaomi_mt6768 $KERNEL_BRANCH $DEVICE_CODENAME
+          cp proton.sh $DEVICE_CODENAME
+          cd $DEVICE_CODENAME
           chmod +x proton.sh
           bash proton.sh
           
@@ -81,16 +80,14 @@ jobs:
 
       - name: Compile Kernel
         env:
-              GIT_USER: ${{ secrets.GIT_USER }}
-              GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
-              TG_TOKEN: ${{ secrets.TG_TOKEN }}
               KERNEL_BRANCH: -b violet-gcc
-              TG_CHAT_ID: -1001711585630
-              TZ: Asia/Jakarta
               DEVICE_DEFCONFIG: lancelot_defconfig
               DEVICE_CODENAME: Lancelot
               DEVICE: Redmi 9
         run: |
+          git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_kernel_xiaomi_mt6768 $KERNEL_BRANCH $DEVICE_CODENAME
+          cp gcc.sh $DEVICE_CODENAME
+          cd $DEVICE_CODENAME
           chmod +x gcc.sh
           bash gcc.sh
 
@@ -109,16 +106,14 @@ jobs:
 
       - name: Compile Kernel
         env:
-              GIT_USER: ${{ secrets.GIT_USER }}
-              GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
-              TG_TOKEN: ${{ secrets.TG_TOKEN }}
               KERNEL_BRANCH: -b violet-base
-              TG_CHAT_ID: -1001711585630
-              TZ: Asia/Jakarta
               DEVICE_DEFCONFIG: merlin_defconfig
               DEVICE_CODENAME: Merlin
               DEVICE: Redmi Note 9
         run: |
+          git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_kernel_xiaomi_mt6768 $KERNEL_BRANCH $DEVICE_CODENAME
+          cp clang15.sh $DEVICE_CODENAME
+          cd $DEVICE_CODENAME
           chmod +x clang15.sh
           bash clang15.sh
           
@@ -137,16 +132,14 @@ jobs:
 
       - name: Compile Kernel
         env:
-                GIT_USER: ${{ secrets.GIT_USER }}
-                GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
-                TG_TOKEN: ${{ secrets.TG_TOKEN }}
                 KERNEL_BRANCH: -b violet-base
-                TG_CHAT_ID: -1001711585630
-                TZ: Asia/Jakarta
                 DEVICE_DEFCONFIG: merlin_defconfig
                 DEVICE_CODENAME: Merlin
                 DEVICE: Redmi Note 9
         run: |
+          git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_kernel_xiaomi_mt6768 $KERNEL_BRANCH $DEVICE_CODENAME
+          cp proton.sh $DEVICE_CODENAME
+          cd $DEVICE_CODENAME
           chmod +x proton.sh
           bash proton.sh
           
@@ -165,16 +158,13 @@ jobs:
 
       - name: Compile Kernel
         env:
-              GIT_USER: ${{ secrets.GIT_USER }}
-              GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
-              TG_TOKEN: ${{ secrets.TG_TOKEN }}
               KERNEL_BRANCH: -b violet-gcc
-              TG_CHAT_ID: -1001711585630
-              TZ: Asia/Jakarta
               DEVICE_DEFCONFIG: merlin_defconfig
               DEVICE_CODENAME: Merlin
               DEVICE: Redmi Note 9
         run: |
+          git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_kernel_xiaomi_mt6768 $KERNEL_BRANCH $DEVICE_CODENAME
+          cp gcc.sh $DEVICE_CODENAME
+          cd $DEVICE_CODENAME
           chmod +x gcc.sh
           bash gcc.sh
-
