@@ -5,8 +5,9 @@
 
 echo "Downloading few Dependecies . . ."
 # Kernel Sources
-git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_kernel_xiaomi_mt6768 $KERNEL_BRANCH $DEVICE_CODENAME
-git clone --depth=1 https://github.com/kdrag0n/proton-clang proton
+git clone --depth=4 https://github.com/NusantaraDevs/DragonTC -b daily/10.0 clang
+git clone --depth=1 https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 10 gcc64
+git clone --depth=1 https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 10 gcc32
 
 # Main Declaration
 KERNEL_NAME=$(cat "arch/arm64/configs/$DEVICE_DEFCONFIG" | grep "CONFIG_LOCALVERSION=" | sed 's/CONFIG_LOCALVERSION="-*//g' | sed 's/"*//g' )
@@ -14,7 +15,7 @@ KERNEL_ROOTDIR=$(pwd)
 KERNELFILE=$(pwd)/AnyKernel/$(echo *.zip)
 DEVICE=$DEVICE
 DEVICE_DEFCONFIG=$DEVICE_DEFCONFIG
-CLANG_ROOTDIR=$(pwd)/proton
+CLANG_ROOTDIR=$(pwd)/clang
 GCC64_DIR=$(pwd)/GCC64
 GCC32_DIR=$(pwd)/GCC32
 export KBUILD_BUILD_USER=Alicia
@@ -28,7 +29,7 @@ DATE2=$(date +"%m%d")
 START=$(date +"%s")
 DTB=$(pwd)/out/arch/arm64/boot/dts/mediatek/mt6768.dtb
 DTBO=$(pwd)/out/arch/arm64/boot/dtbo.img
-PATH="${PATH}:${CLANG_ROOTDIR}/bin"
+PATH="${PATH}:${CLANG_ROOTDIR}/bin:$GCC64_DIR/bin:$GCC32_DIR/bin"
 HeadCommitId="$(git log --pretty=format:'%h' -n1)"
 HeadCommitMsg="$(git log --pretty=format:'%s' -n1)"
 
@@ -57,20 +58,22 @@ make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 O=out \
     CC=${CLANG_ROOTDIR}/bin/clang \
     AR=${CLANG_ROOTDIR}/bin/llvm-ar \
+    AS=$(CLANG_ROOTDIR)/bin/llvm-as \
     NM=${CLANG_ROOTDIR}/bin/llvm-nm \
     OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
     OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
     LD=${CLANG_ROOTDIR}/bin/ld.lld \
-    CROSS_COMPILE=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu- \
-    CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
+    CLANG_TRIPLE=aarch64-linux-gnu- \
+    CROSS_COMPILE=aarch64-zyc-linux-gnu- \
+    CROSS_COMPILE_ARM32=arm-zyc-linux-gnueabi-
 
    if ! [ -a "$IMAGE" ]; then
 	finerr
 	exit 1
    fi
 
-  git clone --depth=1 https://github.com/aliciahouse/AnyKernel3 -b mt6768 AnyKernel
+  git clone --depth=1 https://github.com/aliciahouse/AnyKernel3 -b yukina AnyKernel
 	cp $IMAGE AnyKernel
     cp $DTBO AnyKernel
     mv $DTB AnyKernel/dtb

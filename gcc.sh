@@ -88,7 +88,7 @@ COMMIT_HEAD=$(git log --oneline -1)
 		GCC32_DIR=$KERNEL_DIR/gcc32
 
 	msg "|| Cloning Anykernel ||"
-	git clone --depth 1 --no-single-branch https://github.com/rubyzee/AnyKernel3
+	git clone --depth 1 --no-single-branch https://github.com/rubyzee/AnyKernel3 -b yukina
 }
 
 ##------------------------------------------------------##

@@ -77,7 +77,7 @@ make -j$(nproc) ARCH=arm64 O=out \
 	exit 1
    fi
 
-  git clone --depth=1 https://github.com/aliciahouse/AnyKernel3 -b mt6768 AnyKernel
+  git clone --depth=1 https://github.com/aliciahouse/AnyKernel3 -b yukina AnyKernel
 	cp $IMAGE AnyKernel
     cp $DTBO AnyKernel
     mv $DTB AnyKernel/dtb

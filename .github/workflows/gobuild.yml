@@ -11,7 +11,7 @@ env:
    TZ: Asia/Jakarta
 
 jobs:
-  build-lancelot-r-oss-clang15:
+  build-selene-r-oss-clang15:
    
     runs-on: ubuntu-latest
     container:
@@ -32,18 +32,18 @@ jobs:
 
       - name: Compile Kernel
         env:
-              KERNEL_BRANCH: -b violet-base
-              DEVICE_DEFCONFIG: lancelot_defconfig
-              DEVICE_CODENAME: Lancelot
-              DEVICE: Redmi 9
+              KERNEL_BRANCH: -b yukina
+              DEVICE_DEFCONFIG: selene_defconfig
+              DEVICE_CODENAME: Selene
+              DEVICE: Redmi 10
         run: |
-          git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_kernel_xiaomi_mt6768 $KERNEL_BRANCH $DEVICE_CODENAME
+          git clone --depth=1 https://github.com/Yukina-Supremacy/android_kernel_xiaomi_selene $KERNEL_BRANCH $DEVICE_CODENAME
           cp clang15.sh $DEVICE_CODENAME
           cd $DEVICE_CODENAME
           chmod +x clang15.sh
           bash clang15.sh
           
-  build-lancelot-r-oss-proton:
+  build-selene-r-oss-dtc:
 
     runs-on: ubuntu-latest
     container:
@@ -64,20 +64,19 @@ jobs:
 
       - name: Compile Kernel
         env:
-              TG_TOKEN: ${{ secrets.TG_TOKEN }}
-              KERNEL_BRANCH: -b violet-base
-              DEVICE_DEFCONFIG: lancelot_defconfig
-              DEVICE_CODENAME: Lancelot
-              DEVICE: Redmi 9
+              KERNEL_BRANCH: --b yukina-staging
+              DEVICE_DEFCONFIG: selene_defconfig
+              DEVICE_CODENAME: Selene
+              DEVICE: Redmi 10
 
         run: |
-          git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_kernel_xiaomi_mt6768 $KERNEL_BRANCH $DEVICE_CODENAME
+          git clone --depth=1 https://github.com/Yukina-Supremacy/android_kernel_xiaomi_selene $KERNEL_BRANCH $DEVICE_CODENAME
           cp proton.sh $DEVICE_CODENAME
           cd $DEVICE_CODENAME
-          chmod +x proton.sh
-          bash proton.sh
+          chmod +x dtc.sh
+          bash dtc.sh
           
-  build-lancelot-r-oss-gcc:
+  build-selene-r-oss-gcc:
 
     runs-on: ubuntu-latest
     container:
@@ -98,108 +97,12 @@ jobs:
 
       - name: Compile Kernel
         env:
-              KERNEL_BRANCH: -b violet-gcc
-              DEVICE_DEFCONFIG: lancelot_defconfig
-              DEVICE_CODENAME: Lancelot
-              DEVICE: Redmi 9
+              KERNEL_BRANCH: -b yukina-gcc
+              DEVICE_DEFCONFIG: selene_defconfig
+              DEVICE_CODENAME: Selene
+              DEVICE: Redmi 10
         run: |
-          git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_kernel_xiaomi_mt6768 $KERNEL_BRANCH $DEVICE_CODENAME
-          cp gcc.sh $DEVICE_CODENAME
-          cd $DEVICE_CODENAME
-          chmod +x gcc.sh
-          bash gcc.sh
-
-  build-merlin-r-oss-clang15:
-
-    runs-on: ubuntu-latest
-    container:
-      image: ubuntu:jammy-20211029
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: setup
-        run: |
-            cp -af sources.list /etc/apt/
-            cp -af 99own /etc/apt/apt.conf.d/
-            apt-get autoremove -y && apt-get --purge remove -y && apt-get autoclean -y && apt-get update -y && apt-get upgrade -y && apt-get dist-upgrade -y
-            dpkg-reconfigure -a && dpkg --configure -a
-            ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime && date
-            apt-get -y install -f cpio gcc llvm lld g++-multilib python2 clang git libxml2 python3-pip gcc llvm lld g++-multilib clang default-jre git automake lzop bison gperf build-essential zip curl zlib1g-dev g++-multilib libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng bc libstdc++6 libncurses5 wget python3 python3-pip gcc clang libssl-dev rsync flex git-lfs libz3-dev libz3-4 axel tar bc binutils-dev bison build-essential ca-certificates ccache clang cmake curl file flex git libelf-dev libssl-dev lld make ninja-build python3-dev texinfo u-boot-tools xz-utils zlib1g-dev && python3 -m pip install networkx
-
-      - name: Compile Kernel
-        env:
-              KERNEL_BRANCH: -b violet-base
-              DEVICE_DEFCONFIG: merlin_defconfig
-              DEVICE_CODENAME: Merlin
-              DEVICE: Redmi Note 9
-        run: |
-          git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_kernel_xiaomi_mt6768 $KERNEL_BRANCH $DEVICE_CODENAME
-          cp clang15.sh $DEVICE_CODENAME
-          cd $DEVICE_CODENAME
-          chmod +x clang15.sh
-          bash clang15.sh
-          
-  build-merlin-r-oss-proton:
-
-    runs-on: ubuntu-latest
-    container:
-      image: ubuntu:jammy-20211029
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: setup
-        run: |
-            cp -af sources.list /etc/apt/
-            cp -af 99own /etc/apt/apt.conf.d/
-            apt-get autoremove -y && apt-get --purge remove -y && apt-get autoclean -y && apt-get update -y && apt-get upgrade -y && apt-get dist-upgrade -y
-            dpkg-reconfigure -a && dpkg --configure -a
-            ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime && date
-            apt-get -y install -f cpio gcc llvm lld g++-multilib python2 clang git libxml2 python3-pip gcc llvm lld g++-multilib clang default-jre git automake lzop bison gperf build-essential zip curl zlib1g-dev g++-multilib libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng bc libstdc++6 libncurses5 wget python3 python3-pip gcc clang libssl-dev rsync flex git-lfs libz3-dev libz3-4 axel tar bc binutils-dev bison build-essential ca-certificates ccache clang cmake curl file flex git libelf-dev libssl-dev lld make ninja-build python3-dev texinfo u-boot-tools xz-utils zlib1g-dev && python3 -m pip install networkx
-
-      - name: Compile Kernel
-        env:
-                KERNEL_BRANCH: -b violet-base
-                DEVICE_DEFCONFIG: merlin_defconfig
-                DEVICE_CODENAME: Merlin
-                DEVICE: Redmi Note 9
-        run: |
-          git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_kernel_xiaomi_mt6768 $KERNEL_BRANCH $DEVICE_CODENAME
-          cp proton.sh $DEVICE_CODENAME
-          cd $DEVICE_CODENAME
-          chmod +x proton.sh
-          bash proton.sh
-          
-  build-merlin-r-oss-gcc:
-
-    runs-on: ubuntu-latest
-    container:
-      image: ubuntu:jammy-20211029
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: setup
-        run: |
-            cp -af sources.list /etc/apt/
-            cp -af 99own /etc/apt/apt.conf.d/
-            apt-get autoremove -y && apt-get --purge remove -y && apt-get autoclean -y && apt-get update -y && apt-get upgrade -y && apt-get dist-upgrade -y
-            dpkg-reconfigure -a && dpkg --configure -a
-            ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime && date
-            apt-get -y install -f cpio gcc llvm lld g++-multilib python2 clang git libxml2 python3-pip gcc llvm lld g++-multilib clang default-jre git automake lzop bison gperf build-essential zip curl zlib1g-dev g++-multilib libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng bc libstdc++6 libncurses5 wget python3 python3-pip gcc clang libssl-dev rsync flex git-lfs libz3-dev libz3-4 axel tar bc binutils-dev bison build-essential ca-certificates ccache clang cmake curl file flex git libelf-dev libssl-dev lld make ninja-build python3-dev texinfo u-boot-tools xz-utils zlib1g-dev && python3 -m pip install networkx
-
-      - name: Compile Kernel
-        env:
-              KERNEL_BRANCH: -b violet-gcc
-              DEVICE_DEFCONFIG: merlin_defconfig
-              DEVICE_CODENAME: Merlin
-              DEVICE: Redmi Note 9
-        run: |
-          git clone --depth=1 https://${GIT_USER}:${GIT_TOKEN}@github.com/rubyzee/android_kernel_xiaomi_mt6768 $KERNEL_BRANCH $DEVICE_CODENAME
+          git clone --depth=1 https://github.com/Yukina-Supremacy/android_kernel_xiaomi_selene $KERNEL_BRANCH $DEVICE_CODENAME
           cp gcc.sh $DEVICE_CODENAME
           cd $DEVICE_CODENAME
           chmod +x gcc.sh
